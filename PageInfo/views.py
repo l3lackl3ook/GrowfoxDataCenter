@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Prefetch
 from .models import PageGroup, PageInfo
 from .forms import PageGroupForm, PageURLForm
@@ -69,3 +69,7 @@ def index(request):
 def sidebar_context(request):
     page_groups = PageGroup.objects.all()
     return {'page_groups_sidebar': page_groups, 'page_groups_count': page_groups.count()}
+
+def pageview(request, page_id):
+    page = get_object_or_404(PageInfo, id=page_id)
+    return render(request, 'PageInfo/pageview.html', {'page': page})
