@@ -28,4 +28,5 @@ urlpatterns = [
     path('create-group/', views.create_group, name='create_group'),  # ✅ เพิ่มบรรทัดนี้
     path('add-page/<int:group_id>/', views.add_page, name='add_page'),
     path('group/<int:group_id>/', views.group_detail, name='group_detail'),
+    path('page/<int:page_id>/', views.pageview, name='pageview'),
 ]
