@@ -17,6 +17,14 @@ import re
 import os
 import json  # 👈 ต้อง import นี้
 
+def extract_top_hashtags(posts, top_n=50):
+    hashtag_counter = Counter()
+    for post in posts:
+        content = getattr(post, 'post_content', '') or ''
+        hashtags = re.findall(r"#\S+", content)
+        for tag in hashtags:
+            hashtag_counter[tag.lower()] += 1
+    return hashtag_counter.most_common(top_n)
 
 def clean_number(value):
     if isinstance(value, str):
@@ -357,6 +365,21 @@ def pageview(request, page_id):
 
         facebook_posts_top10 = sorted(facebook_posts, key=lambda p: p.total_engagement, reverse=True)[:10]
         facebook_posts_flop10 = sorted(facebook_posts, key=lambda p: p.total_engagement)[:10]
+        # ===== หลังจากสร้าง facebook_posts สำเร็จแล้ว
+        top_hashtags_raw = extract_top_hashtags(facebook_posts)  # ดึง (tag, count)
+        top_count_max = top_hashtags_raw[0][1] if top_hashtags_raw else 1
+
+        # เตรียมข้อมูลสำหรับ render
+        top_hashtags = []
+        for tag, count in top_hashtags_raw:
+            font_size = round(0.8 + (count / top_count_max) * 1.5, 2)
+            color_hue = round(120 - (count / top_count_max) * 60, 2)
+            top_hashtags.append({
+                "tag": tag,
+                "count": count,
+                "font_size": font_size,
+                "color_hue": color_hue,
+            })
 
         # ✅ สร้างข้อมูล follower line chart จากตาราง FollowerHistory
         follower_qs = FollowerHistory.objects.filter(page=page).order_by('date')
@@ -433,6 +456,7 @@ def pageview(request, page_id):
         day_order = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
         best_times_bubble = []
 
+
         # ฟังก์ชันเลือกสีตามจำนวนโพสต์
         def get_color_by_count(count):
             color_map = {
@@ -477,6 +501,7 @@ def pageview(request, page_id):
         'bar_day_values': json.dumps(bar_day_values),
         'bubble_data': json.dumps(best_times_bubble),
         'bar_day_colors': json.dumps(bar_day_colors),
+        'top_hashtags': top_hashtags,
     })
 
 
