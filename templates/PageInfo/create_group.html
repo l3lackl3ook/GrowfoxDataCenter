@@ -64,6 +64,7 @@
     <!--? Config: Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file. -->
 
     <script src="{% static 'assets/js/config.js' %}"></script>
+
   </head>
 
   <body>
@@ -137,22 +138,25 @@
     <!--? Config: Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file. -->
 
     <script src="{% static 'assets/js/config.js' %}"></script>
+
   </head>
 
   <body>
+
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
       <div class="layout-container">
         <!-- Menu -->
-<aside id="layout-menu" class="layout-menu menu-vertical menu">
+<aside id="layout-menu" class="layout-menu menu-vertical menu ">
   <div class="app-brand demo logo-wrapper">
     <!-- ✅ แก้ href จาก index.html เป็น {% url 'index' %} -->
     <a href="{% url 'index' %}" class="app-brand-link">
+
       <!-- โลโก้ตอนเมนูขยาย -->
       <img src="{% static 'assets/img/branding/growfox.webp' %}" alt="Growfox Logo" class="logo-img logo-expanded" />
 
       <!-- โลโก้ตอนเมนูพับ -->
-      <img src="{% static 'assets/img/branding/logo-fox.jpeg' %}" alt="Growfox Logo Collapsed" class="logo-img logo-collapsed d-none" />
+      <img src="{% static 'assets/img/branding/logo-fox.jpeg' %}" alt="Growfox Logo Collapsed" class="logo-img logo-collapsed" />
     </a>
 
     <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-white text-large ms-auto">
@@ -168,6 +172,7 @@
   </div>
 
   <div class="menu-inner-shadow"></div>
+
 
   <ul class="menu-inner py-1">
 
