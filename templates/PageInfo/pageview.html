@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 {%  load static %}
+=======
+p{%  load static %}
+{% load humanize %}
+>>>>>>> bee78e8f8b34bfc8e75e08ac77a3a7df56667643
 
 <!doctype html>
 
@@ -64,6 +69,11 @@
     <!--? Config: Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file. -->
 
     <script src="{% static 'assets/js/config.js' %}"></script>
+<<<<<<< HEAD
+=======
+    <script src="https://cdn.jsdelivr.net/npm/luxon@3.4.0/build/global/luxon.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-luxon@1.3.0/dist/chartjs-adapter-luxon.min.js"></script>
+>>>>>>> bee78e8f8b34bfc8e75e08ac77a3a7df56667643
   </head>
 
   <body>
@@ -596,6 +606,7 @@
 <!-- Content wrapper -->
 <div class="content-wrapper">
   <div class="container-xxl flex-grow-1 container-p-y">
+<<<<<<< HEAD
         <div class="card p-4 mb-4">
           <div class="row justify-content-between align-items-start mb-4">
             <div class="col-md-9 d-flex">
@@ -667,6 +678,785 @@
   </div>
 </div>
 
+=======
+    <div class="card p-4 mb-4">
+      <div class="row justify-content-between align-items-start mb-4">
+        <div class="col-md-9 d-flex">
+          <div class="position-relative me-3">
+            <a href="{{ page.page_url }}" target="_blank" class="position-absolute" style="top: 0px; left: 90px; z-index: 2;">
+              {% if page.platform == "facebook" %}
+                <img src="{% static 'assets/img/icons/facebook-icon.webp' %}" alt="Facebook Icon" style="width: 20px; height: 20px;" />
+              {% elif page.platform == "tiktok" %}
+                <img src="{% static 'assets/img/icons/tiktoklogo.webp' %}" alt="TikTok Icon" style="width: 20px; height: 20px;" />
+              {% elif page.platform == "instagram" %}
+                <img src="{% static 'assets/img/icons/iglogo.png' %}" alt="Instagram Icon" style="width: 35px; height: 28px;" />
+              {% elif page.platform == "lemon8" %}
+                <img src="{% static 'assets/img/icons/lemon8logo.png' %}" alt="Lemon8 Icon" style="width: 25px; height: 25 px;" />
+              {% elif page.platform == "youtube" %}
+                <img src="{% static 'assets/img/icons/youtubelogo.png' %}" alt="Youtube Icon" style="width: 25px; height: 25 px;" />
+              {% endif %}
+            </a>
+            <a href="{{ page.page_url }}" target="_blank">
+              <img class="rounded-circle border border-2 border-light" src="{{ page.profile_pic|default:'/static/assets/default-profile.png' }}" alt="Page Logo" width="100" height="100" />
+            </a>
+          </div>
+      <div class="ms-2">
+    <h5 class="mb-2">{{ page.page_name|default:page.page_username }}</h5>
+    <div class="text-muted mb-1">
+        <strong>Page Username:</strong>
+        {% if page.platform == "lemon8" %}
+            {% with page.page_url|cut:"https://www.lemon8-app.com/" as lemon8_user %}
+                {{ lemon8_user }}
+            {% endwith %}
+        {% elif page.platform == "youtube" %}
+            {% with page.page_url|cut:"http://www.youtube.com/"|cut:"https://www.youtube.com/"|cut:"@" as yt_user %}
+                {{ yt_user }}
+            {% endwith %}
+        {% else %}
+            {{ page.page_username|default:"-" }}
+        {% endif %}
+    </div>
+            {% if page.platform == "facebook" %}
+              <div class="text-muted mb-1"><strong>Page Categories:</strong> {{ page.page_category|default:"-" }}</div>
+            {% elif page.platform == "instagram" %}
+              <div class="text-muted mb-1"><strong>Platform:</strong> Instagram</div>
+            {% elif page.platform == "lemon8" %}
+              <div class="text-muted mb-1"><strong>Platform:</strong> Lemon8</div>
+                {% elif page.platform == "youtube" %}
+              <div class="text-muted mb-1"><strong>Platform:</strong> YouTube</div>
+            {% endif %}
+          </div>
+        </div>
+        <div class="col-md-3 d-flex justify-content-end">
+          <input type="date" class="form-control" style="max-width: 180px; font-size: 0.9rem;" />
+        </div>
+      </div>
+
+      {% if page.platform == "facebook" %}
+      <div class="row mb-4">
+        <div class="col-md-4 text-muted"><strong>Page Website:</strong> <a href="{{ page.page_website }}">{{ page.page_website|default:"-" }}</a></div>
+        <div class="col-md-4 text-muted"><strong>Page Email:</strong> <a href="mailto:{{ page.page_email }}">{{ page.page_email|default:"-" }}</a></div>
+        <div class="col-md-4 text-muted"><strong>Page Number:</strong> {{ page.page_phone|default:"-" }}</div>
+      </div>
+      {% elif page.platform == "tiktok" %}
+      <div class="row mb-4">
+        <div class="col-md-4 text-muted"><strong>Platform:</strong> TikTok</div>
+        <div class="col-md-4 text-muted"><strong>Contact:</strong> -</div>
+        <div class="col-md-4 text-muted"><strong>Phone:</strong> -</div>
+      </div>
+      {% elif page.platform == "instagram" %}
+      <div class="row mb-4">
+        <div class="col-md-4 text-muted"><strong>Website:</strong> <a href="{{ page.page_website }}">{{ page.page_website|default:"-" }}</a></div>
+        <div class="col-md-4 text-muted"><strong>Category:</strong> {{ page.page_category|default:"-" }}</div>
+      </div>
+      {% elif page.platform == "lemon8" %}
+      <div class="row mb-4">
+        <div class="col-md-4 text-muted"><strong>Website:</strong> <a href="{{ page.page_website }}">{{ page.page_website|default:"-" }}</a></div>
+        <div class="col-md-4 text-muted"><strong>Age:</strong> {{ page.age|default:"-" }}</div>
+        <div class="col-md-4 text-muted"><strong>Following:</strong> {{ page.following_count|intcomma|default:"-" }}</div>
+      </div>
+      {% elif page.platform == "youtube" %}
+  <div class="row mb-4">
+        <div class="col-md-4 text-muted"><strong>Website:</strong> <a href="{{ page.page_website }}">{{ page.page_website|default:"-" }}</a></div>
+    <div class="col-md-4 text-muted"><strong>Country:</strong> {{ page.page_address|default:"-" }}</div>
+    <div class="col-md-4 text-muted"><strong>Join Date:</strong> {{ page.page_join_date|default:"-" }}</div>
+  </div>
+      {% endif %}
+
+<div class="row mb-4 mt-3">
+  <div class="col-md-8">
+    <strong>
+      {% if page.platform == "facebook" %}Page Description:{% elif page.platform == "instagram" %}Bio:{% elif page.platform == "lemon8" %}Bio:{% else %}Description:{% endif %}
+    </strong>
+    <div class="text-muted">{{ page.page_description|default:"-" }}</div>
+  </div>
+
+  {# ✅ เงื่อนไขแสดง Page Address เฉพาะ Facebook ถ้ามี #}
+  {% if page.platform == "facebook" and page.page_address %}
+    <div class="col-md-4">
+      <strong>Page Address:</strong>
+      <div class="text-muted">{{ page.page_address }}</div>
+    </div>
+  {% endif %}
+</div>
+
+<hr class="my-4" />
+
+      <div class="row text-center mt-4">
+        <div class="col">
+          <div class="fw-semibold">
+            {% if page.platform == "facebook" %}
+              {{ page.page_followers_count|intcomma|default:"-" }}
+            {% elif page.platform == "tiktok" %}
+              {{ page.page_followers|intcomma|default:"-" }}
+            {% elif page.platform == "instagram" or page.platform == "lemon8" %}
+              {{ page.page_followers|intcomma|default:"-" }}
+                {% elif page.platform == "youtube" %}
+              {{ page.page_followers|intcomma|default:"-" }}
+            {% endif %}
+          </div>
+          <div class="text-muted small">
+      {% if page.platform == "youtube" %}
+        Subscribe
+      {% else %}
+        Followers
+      {% endif %}
+    </div>
+        </div>
+        <div class="col">
+          <div class="fw-semibold">
+            {% if page.platform == "facebook" %}
+              {{ page.page_likes_count|intcomma|default:"-" }}
+            {% elif page.platform == "tiktok" %}
+              {{ page.page_likes|intcomma|default:"-" }}
+            {% elif page.platform == "instagram" %}
+              {{ page.post_count|intcomma|default:"-" }}
+            {% elif page.platform == "lemon8" %}
+              {{ page.page_likes|intcomma|default:"-" }}
+                {% elif page.platform == "youtube" %}
+  {{ page.page_total_views|intcomma|default:"-" }}
+            {% else %}
+              -
+            {% endif %}
+          </div>
+          <div class="text-muted small">
+  {% if page.platform == "youtube" %}All Views{% elif page.platform == "instagram" %}All Post{% elif page.platform == "lemon8" %}Likes{% else %}Likes{% endif %}
+          </div>
+        </div>
+        <div class="col">
+  <div class="fw-semibold">
+    {% if page.platform == "facebook" %}
+      {{ page.page_talking_count|intcomma|default:"-" }}
+    {% elif page.platform == "youtube" %}
+      {{ page.page_videos_count|intcomma|default:"-" }}
+    {% endif %}
+  </div>
+  <div class="text-muted small">
+    {% if page.platform == "facebook" %}
+      Talking
+    {% elif page.platform == "youtube" %}
+      All Videos
+    {% endif %}
+    </div>
+      </div>
+
+
+
+
+  </div>
+</div>
+
+  {% if facebook_posts or facebook_posts_flop %}
+<div class="row">
+
+  <!-- 🔥 Top 10 Facebook Posts -->
+  <div class="col-lg-6 mb-4">
+    <div class="card shadow-sm border-0">
+      <div class="card-body p-3">
+        <h5 class="card-title mb-3">Top 10 Facebook Posts</h5>
+        <div style="max-height: 600px; overflow-y: auto;">
+          {% for post in facebook_posts_top10 %}
+          <div class="d-flex border rounded mb-2 small overflow-hidden" style="height: 90px;">
+            {% if post.post_imgs %}
+            <a href="https://www.facebook.com/{{ post.post_id }}" target="_blank">
+              <img src="{{ post.post_imgs.0 }}" style="height: 100%; width: 90px; object-fit: cover;" class="rounded-start" />
+            </a>
+            {% else %}
+             <div style="height: 100%; width: 90px; background-color: #f8f9fa;"></div>
+            {% endif %}
+            <div class="flex-grow-1 px-2 py-1 d-flex flex-column justify-content-between" style="min-width: 0;">
+              <div class="d-flex justify-content-between align-items-start">
+                <div class="d-flex align-items-center gap-2">
+                  {% if page.profile_pic %}
+                  <img src="{{ page.profile_pic }}" class="rounded-circle" style="width: 16px; height: 16px;">
+                  {% endif %}
+                  <i class="bi bi-facebook text-primary"></i>
+                  <strong class="text-truncate">{{ page.page_name }}</strong>
+                </div>
+                <div class="text-muted small" style="font-size: 0.65rem;">{{ post.post_timestamp_dt|date:"j M Y - H:i" }}</div>
+              </div>
+              <div class="mt-1 text-dark" style="display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;overflow: hidden;text-overflow: ellipsis;font-size: 0.8rem;">
+                {{ post.post_content }}
+              </div>
+              <div class="d-flex gap-2 text-muted align-items-center" style="font-size: 0.7rem;">
+                {% if post.reactions %}
+                  {% for reaction, count in post.reactions.items %}
+                    {% if reaction == "ถูกใจ" %}<span>👍 {{ count }}</span>{% endif %}
+                    {% if reaction == "รักเลย" %}<span>❤️ {{ count }}</span>{% endif %}
+                    {% if reaction == "เศร้า" %}<span>😢 {{ count }}</span>{% endif %}
+                    {% if reaction == "โกรธ" %}<span>😡 {{ count }}</span>{% endif %}
+                    {% if reaction == "ว้าว" %}<span>😮 {{ count }}</span>{% endif %}
+                    {% if reaction == "ขำ" or reaction == "ฮา" %}<span>😂 {{ count }}</span>{% endif %}
+                  {% endfor %}
+                {% endif %}
+                <span>💬 {{ post.comment_count|default:0 }}</span>
+                <span>↪ {{ post.share_count|default:0 }}</span>
+                <span class="ms-auto fw-semibold text-dark">🔥 {{ post.total_engagement }}</span>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 🧊 Flop 10 Facebook Posts -->
+  <div class="col-lg-6 mb-4">
+    <div class="card shadow-sm border-0">
+      <div class="card-body p-3">
+        <h5 class="card-title mb-3">Flop 10 Facebook Posts</h5>
+        <div style="max-height: 600px; overflow-y: auto;">
+          {% for post in facebook_posts_flop %}
+          <div class="d-flex border rounded mb-2 small overflow-hidden" style="height: 90px;">
+            {% if post.post_imgs %}
+            <a href="https://www.facebook.com/{{ post.post_id }}" target="_blank">
+              <img src="{{ post.post_imgs.0 }}" style="height: 100%; width: 90px; object-fit: cover;" class="rounded-start" />
+            </a>
+            {% else %}
+             <div style="height: 100%; width: 90px; background-color: #f8f9fa;"></div>
+            {% endif %}
+            <div class="flex-grow-1 px-2 py-1 d-flex flex-column justify-content-between" style="min-width: 0;">
+              <div class="d-flex justify-content-between align-items-start">
+                <div class="d-flex align-items-center gap-2">
+                  {% if page.profile_pic %}
+                  <img src="{{ page.profile_pic }}" class="rounded-circle" style="width: 16px; height: 16px;">
+                  {% endif %}
+                  <i class="bi bi-facebook text-primary"></i>
+                  <strong class="text-truncate">{{ page.page_name }}</strong>
+                </div>
+                <div class="text-muted small" style="font-size: 0.65rem;">{{ post.post_timestamp_dt|date:"j M Y - H:i" }}</div>
+              </div>
+              <div class="mt-1 text-dark" style="display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;overflow: hidden;text-overflow: ellipsis;font-size: 0.8rem;">
+                {{ post.post_content }}
+              </div>
+              <div class="d-flex gap-2 text-muted align-items-center" style="font-size: 0.7rem;">
+                {% if post.reactions %}
+                  {% for reaction, count in post.reactions.items %}
+                    {% if reaction == "ถูกใจ" %}<span>👍 {{ count }}</span>{% endif %}
+                    {% if reaction == "รักเลย" %}<span>❤️ {{ count }}</span>{% endif %}
+                    {% if reaction == "เศร้า" %}<span>😢 {{ count }}</span>{% endif %}
+                    {% if reaction == "โกรธ" %}<span>😡 {{ count }}</span>{% endif %}
+                    {% if reaction == "ว้าว" %}<span>😮 {{ count }}</span>{% endif %}
+                    {% if reaction == "ขำ" or reaction == "ฮา" %}<span>😂 {{ count }}</span>{% endif %}
+                  {% endfor %}
+                {% endif %}
+                <span>💬 {{ post.comment_count|default:0 }}</span>
+                <span>↪ {{ post.share_count|default:0 }}</span>
+                <span class="ms-auto fw-semibold text-dark">🔥 {{ post.total_engagement }}</span>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+{% endif %}
+    <br>
+  <!-- 📊 New 100 Posts Overview -->
+<div class="card shadow-sm border-0 mb-4">
+  <div class="card-body p-3">
+    <h5 class="card-title mb-3">New 100 Posts Overview</h5>
+    <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
+      <table class="table table-sm table-hover align-middle mb-0 small">
+        <thead class="table-light text-center align-middle" style="line-height: 1.0; position: sticky; top: 0; z-index: 10; background-color: #f8f9fa;">
+          <tr>
+            <th style="width: 40px;">
+              <span class="visually-hidden">#</span>
+            </th>
+            <th style="min-width: 180px;">
+                <span class="visually-hidden">Page</span>
+            </th>
+            <th style="min-width: 250px;">Post</th>
+            <!-- ลบคอลัมน์ Date ออก -->
+            <th>Likes</th>
+            <th>Comments</th>
+            <th>All Reactions</th>
+            <th>Interaction Rate</th>
+            <th>Reach per Post</th>
+            <th>Impression</th>
+            <th>Sentiment</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for post in facebook_posts %}
+          <tr>
+            <!-- Row number -->
+            <td class="text-center">{{ forloop.counter }}</td>
+
+            <!-- Page info (Profile pic + name + date) -->
+            <td class="text-start">
+  <div class="d-flex align-items-start gap-2">
+    {% if page.profile_pic %}
+    <img src="{{ page.profile_pic }}" style="width: 28px; height: 28px; object-fit: cover;" class="rounded-circle mt-1" />
+    {% endif %}
+    <div class="d-flex flex-column lh-sm">
+      <span class="text-truncate">{{ page.page_name }}</span>
+      <div class="text-muted small" style="font-size: 0.65rem;">
+        {{ post.post_timestamp_dt|date:"j M Y - H:i" }}
+      </div>
+    </div>
+  </div>
+</td>
+
+
+            <!-- Post content & image -->
+            <td style="min-width: 240px; max-width: 240px; padding: 6px 8px;">
+  <div class="d-flex align-items-start gap-2">
+    <div style="flex-shrink: 0;">
+      {% if post.post_imgs %}
+          <a href="https://www.facebook.com/{{ post.post_id }}" target="_blank">
+        <img src="{{ post.post_imgs.0 }}"
+             style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px;" />
+          </a>
+      {% else %}
+        <div style="width: 60px; height: 60px; background-color: #f0f0f0; border-radius: 8px;"></div>
+      {% endif %}
+    </div>
+      <a href="https://www.facebook.com/{{ post.post_id }}" target="_blank">
+    <div class="fw-normal" style="font-size: 0.75rem; line-height: 1.3; max-height: 3.6em; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; white-space: normal;">
+      {{ post.post_content }}
+    </a>
+    </div>
+  </div>
+</td>
+
+
+            <!-- Metrics -->
+            <td class="text-center">{{ post.like_count|default:0 }}</td>
+            <td class="text-center">{{ post.comment_count|default:0 }}</td>
+            <td class="text-center">{{ post.total_engagement|default:0 }}</td>
+            <td class="text-center">{{ post.interaction_rate|default:"0%" }}</td>
+            <td class="text-center">{{ post.reach|default:"-" }}</td>
+            <td class="text-center">{{ post.impression_per_view|default:"-" }}</td>
+            <td class="text-center">{{ post.negative_sentiment_share|default:"0%" }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+          <br>
+<!-- 📊 Engagement Scatter Chart Section -->
+<div class="card shadow-sm border-0 mb-5" style="width: 100%; margin: 0 auto;">
+  <div class="card-body p-4" style="padding: 1.5rem;">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h5 class="card-title mb-0">Engagement Scatter Chart</h5>
+      <span class="text-muted small">{{ start_date }} - {{ end_date }}</span>
+    </div>
+    <div class="d-flex align-items-center mb-3">
+      <span class="badge bg-primary rounded-circle me-2" style="width: 10px; height: 10px;"></span>
+      <span class="text-muted small">Reactions, Comments & Shares</span>
+    </div>
+    <div style="width: 100%; aspect-ratio: 3 / 1;">
+      <canvas id="engagementScatterChart" style="width: 100%; height: 100%; display: block;"></canvas>
+    </div>
+  </div>
+</div>
+
+
+<!-- ✅ Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment@1.0.1"></script>
+
+<script>
+const ctx = document.getElementById('engagementScatterChart').getContext('2d');
+
+const scatterData = {
+  datasets: [{
+    label: 'Engagement',
+    data: [
+      {% for post in facebook_posts %}
+        {
+          x: new Date("{{ post.post_timestamp_dt|date:'Y-m-d H:i' }}"),
+          y: {{ post.total_engagement|default:0 }},
+          img: "{{ post.post_imgs.0|default:'' }}",
+          content: "{{ post.post_content|truncatewords:20|escapejs }}",
+          page_name: "{{ page.page_name|escapejs }}",
+          timestamp: "{{ post.post_timestamp_text|escapejs }}",
+          post_id: "{{ post.post_id }}"
+        }{% if not forloop.last %},{% endif %}
+      {% endfor %}
+    ],
+    backgroundColor: '#FFBBDA',
+    pointRadius: 6,
+    pointHoverRadius: 8,
+  }]
+};
+
+const scatterOptions = {
+  responsive: true,
+  onClick: (e, elements) => {
+    if (elements.length > 0) {
+      const index = elements[0].index;
+      const postId = scatterData.datasets[0].data[index].post_id;
+      window.open(`https://www.facebook.com/${postId}`, '_blank');
+    }
+  },
+  plugins: {
+    tooltip: {
+      enabled: false,
+      external: function(context) {
+  const tooltipModel = context.tooltip;
+  const chart = context.chart;
+
+  let tooltipEl = document.getElementById('chartjs-tooltip');
+  if (!tooltipEl) {
+    tooltipEl = document.createElement('div');
+    tooltipEl.id = 'chartjs-tooltip';
+    tooltipEl.innerHTML = '<div class="tooltip-box"></div>';
+    document.body.appendChild(tooltipEl);
+  }
+
+  if (tooltipModel.opacity === 0) {
+    tooltipEl.style.opacity = 0;
+    return;
+  }
+
+  const dataPoint = tooltipModel.dataPoints[0].raw;
+  const postUrl = `https://www.facebook.com/${dataPoint.post_id}`;
+
+  const html = `
+    <div class="d-flex align-items-start gap-2" style="max-width: 500px;">
+      <a href="${postUrl}" target="_blank">
+        <img src="${dataPoint.img}" style="width: 80px; height: 80px; object-fit: cover; border-radius: 6px;" />
+      </a>
+      <div class="flex-grow-1">
+        <div style="font-weight: 600; font-size: 14px; color: #111; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+          ${dataPoint.page_name}
+        </div>
+        <div style="font-size: 13px; color: #555;">${dataPoint.timestamp}</div>
+        <div style="font-size: 14px; color: #333; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 400px;">
+          ${dataPoint.content}
+        </div>
+        <div style="font-size: 11px; color: #999; margin-top: 2px;">Total Engagement: ${dataPoint.y}</div>
+      </div>
+    </div>
+  `;
+
+  tooltipEl.querySelector('.tooltip-box').innerHTML = html;
+
+  const position = chart.canvas.getBoundingClientRect();
+  const tooltipWidth = 500;
+  let left = position.left + window.pageXOffset + tooltipModel.caretX + 10;
+  let top = position.top + window.pageYOffset + tooltipModel.caretY + 10;
+
+  // ✅ ตรวจสอบไม่ให้ล้นขอบขวาของหน้าจอ
+  const screenWidth = window.innerWidth;
+  if (left + tooltipWidth > screenWidth) {
+    left = screenWidth - tooltipWidth - 20; // -20 เป็น padding ด้านขวา
+  }
+
+  tooltipEl.style.opacity = 1;
+  tooltipEl.style.position = 'absolute';
+  tooltipEl.style.left = `${left}px`;
+  tooltipEl.style.top = `${top}px`;
+  tooltipEl.style.background = 'white';
+  tooltipEl.style.border = '1px solid #ddd';
+  tooltipEl.style.borderRadius = '8px';
+  tooltipEl.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)';
+  tooltipEl.style.padding = '10px';
+  tooltipEl.style.pointerEvents = 'none';
+  tooltipEl.style.fontFamily = 'Inter, sans-serif';
+  tooltipEl.style.maxWidth = '500px';
+  tooltipEl.style.zIndex = '9999';
+}
+    }
+  },
+  scales: {
+    x: {
+      type: 'time',
+      time: {
+        tooltipFormat: 'DD MMM YYYY',
+        unit: 'day',
+        displayFormats: {
+          day: 'DD MMM'
+        }
+      },
+      title: {
+        display: true,
+        text: 'Date'
+      },
+      ticks: {
+        color: '#888'
+      }
+    },
+     y: {
+    beginAtZero: true,
+    suggestedMax: 200,        // หรือค่าสูงสุดของคุณ
+    ticks: {
+      stepSize: 20,           // ✅ ให้เส้น Y-grid ห่างเท่ากันและตรงกับจุด
+      color: '#888'
+    },
+    title: {
+      display: true,
+      text: 'Engagement'
+    },
+    grid: {
+      color: '#e0e0e0'
+    }
+    }
+  }
+};
+
+new Chart(ctx, {
+  type: 'scatter',
+  data: scatterData,
+  options: scatterOptions
+});
+</script>
+
+<style>
+  #chartjs-tooltip {
+  transition: all 0.2s ease;
+  max-width: 500px;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  z-index: 9999;
+  position: absolute;
+}
+</style>
+<br>
+<!-- 📊 Number of posts by days & Best Times To Post -->
+<div class="row">
+  <!-- 📊 Number of posts by days -->
+  <div class="col-md-6">
+    <div class="card shadow-sm rounded p-3 mb-4" style="aspect-ratio: 4 / 2;">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h6 class="mb-0">Number of posts by days</h6>
+      </div>
+      <div class="position-relative" style="width: 100%; height: 100%;">
+        <canvas id="postsByDayChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- 🕒 Best Times To Post -->
+  <div class="col-md-6">
+    <div class="card shadow-sm rounded p-3 mb-4" style="aspect-ratio: 4 / 2;">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h6 class="mb-0">Best Times To Post</h6>
+      </div>
+      <div class="position-relative" style="width: 100%; height: 100%;">
+        <canvas id="bestTimesChart"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  // 🎨 Bar Chart: Number of posts by days
+  const dayCtx = document.getElementById("postsByDayChart").getContext("2d");
+  new Chart(dayCtx, {
+    type: "bar",
+    data: {
+      labels: {{ bar_day_labels|safe }},
+      datasets: [{
+        label: "Number of posts",
+        data: {{ bar_day_values|safe }},
+        backgroundColor: {{ bar_day_colors|safe }},
+        borderRadius: 6,
+        barThickness: 28,
+      }],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        y: {
+          beginAtZero: true,
+          ticks: { precision: 0, color: "#485b7d", font: { size: 12, family: "Inter" } },
+          grid: { color: "#e0e0e0" }
+        },
+        x: {
+          ticks: { color: "#485b7d", font: { size: 12, family: "Inter" } },
+          grid: { display: false }
+        }
+      },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: function (context) {
+              return `Posts: ${context.parsed.y}`;
+            }
+          }
+        }
+      }
+    }
+  });
+
+  // 🟢 Bubble Chart: Best Times To Post
+  const timeCtx = document.getElementById("bestTimesChart").getContext("2d");
+  new Chart(timeCtx, {
+    type: 'bubble',
+    data: {
+      datasets: JSON.parse('{{ bubble_data|escapejs }}').map(point => ({
+        label: point.label,
+        data: [{
+          x: point.x,
+          y: point.y,
+          r: point.r,
+          customTooltip: {
+            line1: point.label,
+            line2: `${point.count} Number of posts`,
+            line3: `${point.likes} Likes, ${point.comments} Comments, ${point.shares} Shares`
+          }
+        }],
+        backgroundColor: point.color,
+        hoverBackgroundColor: point.color
+      }))
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        x: {
+          min: -0.5,
+          max: 6.5,
+          ticks: {
+            callback: function (value) {
+              return ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'][value];
+            },
+            color: '#485b7d',
+            font: { size: 12, family: "Inter" }
+          },
+          grid: { display: false }
+        },
+        y: {
+          min: 0,
+          max: 24,
+          ticks: {
+            stepSize: 2,
+            color: '#485b7d',
+            font: { size: 12, family: "Inter" }
+          },
+          grid: { color: "#e0e0e0" }
+        }
+      },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: function(context) {
+              const t = context.raw.customTooltip;
+              return [t.line1, t.line2, t.line3];
+            }
+          }
+        }
+      }
+    }
+  });
+});
+</script>
+
+<br>
+
+<!-- 👥 Follower Line Chart & 🔠 Top 50 Hashtags -->
+<div class="row">
+  <!-- 👥 Follower Line Chart -->
+  <div class="col-md-6">
+    <div class="card shadow-sm border-0 mb-4" style="aspect-ratio: 4 / 2;">
+      <div class="card-body p-4 d-flex flex-column justify-content-between" style="height: 450px;">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h5 class="card-title mb-0">Follower Line Chart</h5>
+          <span class="text-muted small">{{ start_date }} - {{ end_date }}</span>
+        </div>
+        <div class="d-flex align-items-center mb-3">
+          <span class="badge bg-success rounded-circle me-2" style="width: 10px; height: 10px;"></span>
+          <span class="text-muted small">Number of followers per day</span>
+        </div>
+        <div style="flex-grow: 1; position: relative;">
+          <div id="followerLineChart" style="width: 100%; height: 100%;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<!-- ✅ Google Chart Library -->
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+  google.charts.load('current', { packages: ['corechart'] });
+  google.charts.setOnLoadCallback(drawFollowerChart);
+
+  function drawFollowerChart() {
+    const data = new google.visualization.DataTable();
+    data.addColumn('string', 'Date');
+    data.addColumn('number', 'Follower');
+
+    data.addRows([
+      {% for row in follower_data %}
+        ['{{ row.date }}', {{ row.followers }}]{% if not forloop.last %},{% endif %}
+      {% endfor %}
+    ]);
+
+    const options = {
+  chartArea: { left: 60, top: 30, width: '92%', height: '80%' },
+  fontName: 'Inter',
+  legend: { position: 'none' },
+  series: { 0: { color: '#FFA266' } },
+  hAxis: {
+    textStyle: { color: '#485B7D', fontSize: 12 },
+    baselineColor: '#485B7D'
+  },
+  vAxis: {
+    format: 'decimal',
+    textStyle: { color: '#485B7D', fontSize: 12 },
+    baselineColor: '#485B7D',
+    gridlines: { color: '#dce1eb', count: 4 }
+  }
+};
+
+
+    const chart = new google.visualization.LineChart(document.getElementById('followerLineChart'));
+    chart.draw(data, options);
+  }
+</script>
+
+<!-- 🔠 Top 50 Hashtags Wordcloud (แบบ Fanpage Karma) -->
+<div class="col-md-6">
+  <div class="card shadow-sm border-0 mb-4" style="height: 450px;">
+    <div class="card-body p-4 d-flex flex-column justify-content-between h-100">
+      <div>
+        <h6 class="mb-2">Top 50 Hashtags by Posts</h6>
+        <p class="text-muted small">The bigger the word, the more it was used. The greener, the more these posts were interacted with.</p>
+
+        <div class="d-flex flex-wrap gap-2 overflow-auto" id="hashtagCloudBox" style="max-height: 280px;">
+          {% for tag in top_hashtags %}
+            <a href="#" class="fw-medium"
+              style="
+                font-size: {{ tag.font_size }}em;
+                color: hsl({{ tag.color_hue }}, 60%, 50%);
+                text-decoration: none;
+                line-height: 1.2em;
+              ">
+              {{ tag.tag }}
+            </a>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="analytics_chartLegend mt-3 small text-muted">
+        <div class="analytics_chartLegendItem">size = frequency</div>
+        <div class="analytics_chartLegendItemGreen">green = high engagement</div>
+        <div class="analytics_chartLegendItemRed">red = low engagement</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+          <br>
+
+>>>>>>> bee78e8f8b34bfc8e75e08ac77a3a7df56667643
             <!-- Footer -->
 <footer class="content-footer footer bg-footer-theme mt-auto py-4 border-top">
   <div class="container-xxl d-flex flex-column flex-md-row align-items-center justify-content-between">

@@ -1,4 +1,8 @@
 {%  load static %}
+<<<<<<< HEAD
+=======
+{% load humanize %}
+>>>>>>> bee78e8f8b34bfc8e75e08ac77a3a7df56667643
 
 <!doctype html>
 
@@ -696,6 +700,7 @@
         <input type="text" placeholder="Search Page" class="form-control w-25">
       </div>
       <div class="table-responsive">
+<<<<<<< HEAD
         <table class="table table-striped align-middle text-center">
           <thead class="table-light">
             <tr>
@@ -728,6 +733,111 @@
             </tr>
             {% endfor %}
           </tbody>
+=======
+  <table class="table table-striped align-middle text-center">
+    <thead class="table-light">
+      <tr>
+        <th scope="col">Page</th>
+        <th scope="col">Followers</th>
+
+        {% if pages|length > 0 and pages.0.platform == "youtube" %}
+          <th scope="col">Viewers</th>
+          <th scope="col">All Video</th>
+        {% else %}
+          <th scope="col">Likes</th>
+          <th scope="col">Talking</th>
+        {% endif %}
+
+        <th scope="col">Website</th>
+        <th scope="col">Email</th>
+        <th scope="col">Phone</th>
+      </tr>
+    </thead>
+
+<tbody>
+{% for page in pages %}
+<tr>
+  <td class="d-flex align-items-center">
+    <img src="{{ page.profile_pic }}" alt="{{ page.page_name|default:page.page_username }}" width="40" height="40" class="rounded-circle me-2">
+    <div class="text-start">
+      <a href="{% url 'pageview' page.id %}" class="fw-semibold">
+        {{ page.page_name|default:page.page_username }}
+      </a>
+      <br>
+      <a href="{{ page.page_url }}" target="_blank" class="small text-muted">View Page</a>
+    </div>
+  </td>
+
+  <!-- Followers -->
+  <td class="hover-count">
+    <span class="short">{{ page.page_followers|intcomma|default:"-" }}</span>
+    <span class="full">{{ page.page_followers_count|intcomma|default:"-" }}</span>
+  </td>
+
+  <!-- Likes หรือค่าที่แพลตฟอร์มอื่นใช้ -->
+  <td class="hover-count">
+    <span class="short">
+      {% if page.platform == "lemon8" %}
+        {{ page.page_likes|default:"-" }}
+      {% else %}
+        {{ page.page_likes|intcomma|default:"-" }}
+      {% endif %}
+    </span>
+    <span class="full">
+      {% if page.platform == "lemon8" %}
+        {{ page.page_likes|default:"-" }}
+      {% else %}
+        {{ page.page_likes_count|intcomma|default:"-" }}
+      {% endif %}
+    </span>
+  </td>
+
+  <style>
+  .hover-count .full {
+    display: none;
+    background-color: black;
+    color: white;
+    padding: 2px 5px;
+    border-radius: 4px;
+  }
+  .hover-count:hover .short {
+    display: none;
+  }
+  .hover-count:hover .full {
+    display: inline;
+  }
+  </style>
+
+  <!-- Talking, Website, Email, Phone -->
+  {% if page.platform == "facebook" %}
+    <td>{{ page.page_talking_count|default:"0" }}</td>
+    <td><a href="{{ page.page_website }}" target="_blank">{{ page.page_website|default:"-" }}</a></td>
+    <td><a href="mailto:{{ page.page_email }}">{{ page.page_email|default:"-" }}</a></td>
+    <td>{{ page.page_phone|default:"-" }}</td>
+  {% elif page.platform == "instagram" %}
+    <td>-</td>
+    <td><a href="{{ page.page_website }}" target="_blank">{{ page.page_website|default:"-" }}</a></td>
+    <td>-</td>
+    <td>-</td>
+  {% elif page.platform == "lemon8" %}
+    <td>-</td>
+    <td><a href="{{ page.page_website }}" target="_blank">{{ page.page_website|default:"-" }}</a></td>
+    <td>-</td>
+    <td>-</td>
+{% elif page.platform == "youtube" %}
+  <td>{{ page.page_videos_count|default:"-" }}</td>
+  <td><a href="{{ page.page_website }}" target="_blank">{{ page.page_website|default:"-" }}</a></td>
+  <td>-</td>
+  <td>-</td>
+{% else %}
+  <td>-</td>
+  <td>-</td>
+  <td>-</td>
+  <td>-</td>
+{% endif %}</tr>
+{% endfor %}
+</tbody>
+>>>>>>> bee78e8f8b34bfc8e75e08ac77a3a7df56667643
         </table>
       </div>
     </div>

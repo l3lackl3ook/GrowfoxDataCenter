@@ -1,5 +1,10 @@
 from pprint import pprint
+<<<<<<< HEAD
 
+=======
+from ftplib import FTP
+from io import BytesIO
+>>>>>>> bee78e8f8b34bfc8e75e08ac77a3a7df56667643
 from curl_cffi import requests
 from selectolax.parser import HTMLParser
 import json
@@ -8,6 +13,35 @@ import re
 from typing import Optional, Dict
 from urllib.parse import urlparse
 
+<<<<<<< HEAD
+=======
+def upload_to_sghost(image_url: str) -> str:
+    from urllib.parse import urlparse
+    import requests
+    import os
+
+    FTP_HOST = "ftp.taechins18.sg-host.com"
+    FTP_USER = "admin@taechins18.sg-host.com"
+    FTP_PASS = "#),51@37f]1i"
+    FTP_PATH = "taechins18.sg-host.com/public_html/image"
+    BASE_URL = "https://taechins18.sg-host.com/image/"
+
+    filename = os.path.basename(urlparse(image_url).path)
+
+    ftp = FTP()
+    ftp.connect(FTP_HOST, 21)
+    ftp.login(FTP_USER, FTP_PASS)
+    ftp.cwd(FTP_PATH)
+
+    headers = {'User-Agent': 'Mozilla/5.0'}
+    response = requests.get(image_url, headers=headers)
+    response.raise_for_status()
+
+    ftp.storbinary(f"STOR {filename}", BytesIO(response.content))
+    ftp.quit()
+
+    return f"{BASE_URL}{filename}"
+>>>>>>> bee78e8f8b34bfc8e75e08ac77a3a7df56667643
 
 class RequestHandler:
     def __init__(self):
@@ -152,12 +186,27 @@ class PageInfo:
 
                     general_info["is_business_page"] = user.get("delegate_page", {}).get("is_business_page_active")
 
+<<<<<<< HEAD
                     general_info["profile_pic"] = (
+=======
+                    original_pic = (
+>>>>>>> bee78e8f8b34bfc8e75e08ac77a3a7df56667643
                             user.get("profilePicLarge", {}).get("uri")
                             or user.get("profilePicMedium", {}).get("uri")
                             or user.get("profilePicSmall", {}).get("uri")
                     )
 
+<<<<<<< HEAD
+=======
+                    if original_pic:
+                        try:
+                            uploaded_url = upload_to_sghost(original_pic)
+                            general_info["profile_pic"] = uploaded_url
+                        except Exception as e:
+                            print(f"❌ Failed to upload profile_pic to sg-host: {e}")
+                            general_info["profile_pic"] = original_pic
+
+>>>>>>> bee78e8f8b34bfc8e75e08ac77a3a7df56667643
                     profile_social_contents = user.get(
                         "profile_social_context", {}
                     ).get("content", [])
@@ -333,4 +382,8 @@ if __name__ == "__main__":
     pprint(page_info)
 
     page_follower = PageFollowers(page_id)
+<<<<<<< HEAD
     pprint(page_follower)
+=======
+    pprint(page_follower)
+>>>>>>> bee78e8f8b34bfc8e75e08ac77a3a7df56667643

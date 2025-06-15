@@ -3,4 +3,8 @@
   <component name="Black">
     <option name="sdkName" value="Python 3.12 (FB_WebApp_Project)" />
   </component>
+<<<<<<< HEAD
+=======
+  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.13 (PyCharmMiscProject)" project-jdk-type="Python SDK" />
+>>>>>>> bee78e8f8b34bfc8e75e08ac77a3a7df56667643
 </project>
