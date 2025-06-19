@@ -1,0 +1,295 @@
+/*
+* demo.css
+* File include item demo only specific css only
+******************************************************************************/
+
+.menu .app-brand.demo {
+  height: 64px;
+}
+
+.app-brand-logo.demo svg {
+  width: 38px;
+  height: 20px;
+}
+
+.app-brand-text.demo {
+  font-size: 1.25rem;
+  letter-spacing: 0.15px;
+}
+
+.authentication-wrapper .app-brand-text.demo {
+  text-transform: capitalize;
+}
+
+/* ! For .layout-navbar-fixed added fix padding top to .layout-page */
+/* Default navbar */
+.layout-navbar-fixed .layout-wrapper:not(.layout-without-menu) .layout-page {
+  padding-top: 64px !important;
+}
+
+/* Navbar page z-index issue solution */
+.content-wrapper .navbar {
+  z-index: auto;
+}
+
+/*
+* Content
+******************************************************************************/
+
+.demo-blocks > * {
+  display: block !important;
+}
+
+.demo-inline-spacing > * {
+  margin: 1rem 0.375rem 0 0 !important;
+}
+
+/* ? .demo-vertical-spacing class is used to have vertical margins between elements. To remove margin-top from the first-child, use .demo-only-element class with .demo-vertical-spacing class. For example, we have used this class in forms-input-groups.html file. */
+.demo-vertical-spacing > * {
+  margin-top: 1.25rem !important;
+  margin-bottom: 0 !important;
+}
+.demo-vertical-spacing.demo-only-element > :first-child {
+  margin-top: 0 !important;
+}
+
+.demo-vertical-spacing-lg > * {
+  margin-top: 1.875rem !important;
+  margin-bottom: 0 !important;
+}
+.demo-vertical-spacing-lg.demo-only-element > :first-child {
+  margin-top: 0 !important;
+}
+
+.demo-vertical-spacing-xl > * {
+  margin-top: 5rem !important;
+  margin-bottom: 0 !important;
+}
+.demo-vertical-spacing-xl.demo-only-element > :first-child {
+  margin-top: 0 !important;
+}
+
+/* Dropdown buttons going out of small screens */
+@media (max-width: 576px) {
+  #dropdown-variation-demo .btn-group .text-truncate {
+    width: 300px;
+    position: relative;
+  }
+  #dropdown-variation-demo .btn-group .text-truncate::after {
+    position: absolute;
+    top: 45%;
+    right: 0.65rem;
+  }
+}
+/*
+* Layout demo
+******************************************************************************/
+
+.layout-demo-wrapper {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin-top: 1.25rem;
+}
+.layout-demo-placeholder img {
+  width: 900px;
+}
+.layout-demo-info {
+  text-align: center;
+  margin-top: 1.25rem;
+}
+/* ส่วนนี้ควบคุมเฉพาะกล่องโลโก้ */
+.logo-wrapper {
+  background-color: #2f2f2f; /* พื้นหลังสีดำ */
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-img {
+  width: 222px !important;
+  height: 60px !important;
+  object-fit: contain;
+  display: block;
+}
+
+/* ปกติแสดงโลโก้ใหญ่ */
+.logo-expanded {
+  display: block;
+}
+.logo-collapsed {
+  display: none;
+}
+
+/* เมื่อเมนูพับ (เช่น .layout-menu-collapsed class ถูกเพิ่มเข้า body หรือ menu) */
+.layout-menu-collapsed .logo-expanded {
+  display: none !important;
+}
+.layout-menu-collapsed .logo-collapsed {
+  display: block !important;
+}
+
+
+/* ให้สไตล์ใกล้เคียง toggle menu เดิม */
+.custom-add-group {
+  background-color: #ff5c00 !important;
+  color: white !important;
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+  transition: all 0.3s ease;
+}
+
+.custom-add-group:hover {
+  background-color: #e95400 !important;
+  color: white !important;
+  text-decoration: none;
+}
+
+/* ขนาด icon ให้พอดีเหมือน toggle */
+.custom-add-group .menu-icon {
+  font-size: 20px;
+  line-height: 1;
+}
+/* เปลี่ยนปุ่มเมนู active (เช่น Overview) เป็นสีส้ม */
+.menu-item.active > .menu-link {
+  background-color: #FF6B00 !important;  /* สีส้มจาก Figma */
+  color: #ffffff !important;            /* สีข้อความ */
+  font-weight: 600;
+  border-radius: 8px;
+}
+
+/* เปลี่ยนสี icon ในเมนูที่ active เป็นสีขาว */
+.menu-item.active .menu-icon {
+  color: #ffffff !important;
+}
+
+/* เปลี่ยนสีเมื่อ hover group-link*/
+.group-link {
+    display: inline-block;
+    text-decoration: none;
+    color: inherit;
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+  }
+
+  .group-link:hover {
+    background-color: #ffa940;  /* สีพื้นหลังเมื่อ hover */
+    color: #fff;                /* เปลี่ยนสีตัวอักษรเป็นขาวเมื่อ hover */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* เงา */
+    transform: translateY(-2px); /* ขยับขึ้นเล็กน้อย */
+  }
+ /* -------------------------------
+     ตั้งค่าพื้นหลังและฟอนต์ให้กับทั้งหน้า
+  ---------------------------------- */
+  body {
+    background: linear-gradient(to bottom right, #fff3e0, #ffe0b2); /* ไล่เฉดสีส้มอ่อนจากมุมซ้ายบนไปขวาล่าง */
+    background-repeat: no-repeat;
+    min-height: 100vh; /* ให้ความสูงเต็มหน้าจอ */
+    font-family: 'Segoe UI', sans-serif; /* ใช้ฟอนต์อ่านง่าย ทันสมัย */
+  }
+
+  /* -------------------------------
+     การ์ด (กล่องขาว) สำหรับฟอร์ม
+  ---------------------------------- */
+  .card {
+    background: white;
+    border: none;
+    border-radius: 1rem; /* มุมโค้งมน */
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08); /* เงาจางๆ ใต้กล่อง */
+    animation: fadeInUp 1s ease; /* ใช้อนิเมชันตอนโหลด */
+  }
+
+  /* -------------------------------
+     หัวข้อของการ์ด (เช่น "Create New Group")
+  ---------------------------------- */
+  .card-title {
+    font-size: 1.75rem;
+    color: #333; /* สีเทาเข้ม */
+    position: relative; /* เพื่อวางไอคอนหลังข้อความ */
+  }
+
+  /* -------------------------------
+     ใส่ไอคอนดาวประกาย ✨ หลังชื่อหัวข้อ
+  ---------------------------------- */
+  .card-title::after {
+    content: "✨";
+    position: absolute;
+    top: 0;
+    font-size: 1.5rem;
+  }
+
+  /* -------------------------------
+     สไตล์ของ Label ฟอร์ม
+  ---------------------------------- */
+  label.form-label {
+    color: #ff6f00; /* สีส้มสด */
+    font-weight: 600; /* ตัวหนาเล็กน้อย */
+  }
+
+  /* -------------------------------
+     สไตล์ของ input ช่องกรอกข้อความ
+  ---------------------------------- */
+  input.form-control {
+    border-radius: 0.75rem;
+    border: 1px solid #ddd; /* ขอบสีเทาอ่อน */
+    padding: 10px 15px;
+    font-size: 1rem;
+    transition: box-shadow 0.3s ease; /* ลื่นเมื่อโฟกัส */
+  }
+
+  /* -------------------------------
+     เอฟเฟกต์เมื่อ input ถูก focus (คลิกหรือแตะ)
+  ---------------------------------- */
+  input.form-control:focus {
+    box-shadow: 0 0 8px #ff9800; /* เงาเรืองแสงส้ม */
+    border-color: #ff9800;
+  }
+
+  /* -------------------------------
+     ปุ่ม Create (ปุ่มส้ม)
+  ---------------------------------- */
+  .btn-create {
+    background: linear-gradient(to right, #ff9800, #ff6f00); /* ไล่เฉดส้ม */
+    color: white;
+    border: none;
+    transition: transform 0.2s, box-shadow 0.2s; /* ลื่นเมื่อ hover */
+  }
+
+  /* -------------------------------
+     เอฟเฟกต์ตอน hover ปุ่ม Create
+  ---------------------------------- */
+  .btn-create:hover {
+    transform: translateY(-2px); /* ขยับขึ้นนิดหน่อย */
+    box-shadow: 0 4px 12px rgba(255, 111, 0, 0.4); /* เงาส้มลอยๆ */
+  }
+
+  /* -------------------------------
+     เอฟเฟกต์ตอน hover ปุ่ม Cancel
+  ---------------------------------- */
+  .btn-cancel:hover {
+    background-color: #f1f1f1; /* สีพื้นจางเมื่อเอาเมาส์ชี้ */
+  }
+
+  /* -------------------------------
+     อนิเมชัน fadeInUp ใช้ตอนโหลดการ์ด
+  ---------------------------------- */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px); /* เริ่มต้นจากล่าง */
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0); /* เลื่อนขึ้นและปรากฏ */
+    }
+  }
