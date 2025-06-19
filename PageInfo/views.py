@@ -294,6 +294,42 @@ def group_detail(request, group_id):
     group = get_object_or_404(PageGroup, id=group_id)
     pages = group.pages.all().order_by('-page_followers_count')
     posts = FacebookPost.objects.filter(page__in=pages)
+    # 🔟 Top 10 Posts by Engagement
+    top10_posts = sorted(
+        [p for p in posts if p.post_timestamp_dt],
+        key=lambda p: (
+                (sum(p.reactions.values()) if isinstance(p.reactions, dict) else 0)
+                + (p.comment_count or 0)
+                + (p.share_count or 0)
+        ),
+        reverse=True
+    )[:10]
+
+    top10_posts_data = []
+    for post in top10_posts:
+        total_engagement = (
+                (sum(post.reactions.values()) if isinstance(post.reactions, dict) else 0)
+                + (post.comment_count or 0)
+                + (post.share_count or 0)
+        )
+
+        # แบบสมเหตุสมผล: 100 interaction = 1% engagement rate
+        engagement_rate = round((total_engagement / 100), 1)
+        engagement_rate = min(engagement_rate, 10.0)  # ตัดเพดานที่ 10%
+
+        top10_posts_data.append({
+            'post_id': post.post_id,
+            'post_content': post.post_content,
+            'post_imgs': post.post_imgs,
+            'post_timestamp': post.post_timestamp_dt.strftime('%Y-%m-%d %H:%M'),
+            'reactions': post.reactions or {},
+            'comment_count': post.comment_count,
+            'share_count': post.share_count,
+            'total_engagement': total_engagement,
+            'engagement_rate': engagement_rate,
+            'page_name': post.page.page_name if post.page else '',
+            'page_profile_pic': post.page.profile_pic if post.page else ''
+        })
 
     colors = ['#e20414', '#2e3d93', '#fbd305', '#355e73', '#0c733c', '#c94087']
 
@@ -438,6 +474,7 @@ def group_detail(request, group_id):
         'posts_grouped_json': json.dumps(posts_grouped_by_time),
         'posts_by_day_json': json.dumps(posts_grouped_by_day),
         'followers_posts_map': json.dumps(followers_posts_map),
+        'facebook_posts_top10': top10_posts_data,
     })
 
 

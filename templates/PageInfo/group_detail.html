@@ -1307,6 +1307,145 @@ const followersChart = new Chart(ctx, {
   </script>
 
 <br>
+<!-- 📌 Top 10 Posts: Engagement Section -->
+<div class="card shadow-sm rounded mb-5" style="max-width: 100%; height: 550px; overflow-y: auto; position: relative;">
+  <!-- ✅ Sticky Header -->
+  <div class="d-flex justify-content-between align-items-center"
+       style="position: sticky; top: 0; z-index: 10; background: white; padding: 12px 16px; border-bottom: 1px solid #eee;">
+    <h5 class="fw-bold mb-0" style="font-size: 16px;">Top 10 Posts: Engagement</h5>
+    <button class="btn btn-light btn-sm border" onclick="openPresentation()">📊 Presentation</button>
+  </div>
+
+  <!-- ✅ Grid Layout -->
+  <div class="px-3 py-2">
+    <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-xl-6 g-3">
+      {% for post in facebook_posts_top10 %}
+      <div class="col">
+        <a href="https://www.facebook.com/{{ post.post_id }}" target="_blank" class="text-decoration-none">
+          <div class="position-relative rounded overflow-hidden shadow-sm" style="height: 250px;">
+            <!-- 🔺 Background Image -->
+            <img src="{{ post.post_imgs.0 }}" class="w-100 h-100" style="object-fit: cover;">
+
+            <!-- 🔵 Profile Picture + Facebook Icon -->
+            <div class="position-absolute top-0 start-0 m-1">
+              <div class="position-relative" style="width: 24px; height: 24px;">
+                {% if post.page_profile_pic %}
+                <img src="{{ post.page_profile_pic }}" class="rounded-circle border border-white"
+                     width="24" height="24" style="object-fit: cover;">
+                {% else %}
+                <img src="{% static 'assets/img/icons/default_profile.png' %}" class="rounded-circle border border-white"
+                     width="24" height="24" style="object-fit: cover;">
+                {% endif %}
+                <img src="{% static 'assets/img/icons/facebooklogo.png' %}"
+                     width="10" height="10"
+                     class="position-absolute bottom-0 end-0 bg-white rounded-circle border border-white">
+              </div>
+            </div>
+
+            <!-- 📈 Engagement Rate -->
+            <div class="position-absolute top-0 end-0 m-1">
+              <span class="bg-dark text-white small px-1 py-0 rounded" style="opacity: 0.85; font-size: 11px;">
+                {{ post.engagement_rate }}%
+              </span>
+            </div>
+
+            <!-- 🕒 Timestamp & Content -->
+            <div class="position-absolute bottom-0 start-0 text-white text-shadow px-2 py-1"
+                 style="font-size: 10px; width: 100%; background: linear-gradient(transparent, rgba(0,0,0,0.6));">
+              <div>{{ post.post_timestamp }}</div>
+              <div class="fw-semibold text-truncate">{{ post.post_content }}</div>
+            </div>
+
+            <!-- 📷 Post Type Icon -->
+            <div class="position-absolute bottom-0 end-0 m-1">
+              {% if post.post_type == "video" %}
+              <i class="fas fa-play-circle text-white" style="font-size: 12px;"></i>
+              {% else %}
+              <i class="fas fa-image text-white" style="font-size: 12px;"></i>
+              {% endif %}
+            </div>
+          </div>
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+
+<!-- 📊 Presentation Modal -->
+<div id="presentationModal" class="modal fade" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-fullscreen">
+    <div class="modal-content">
+
+      <div class="modal-body p-4 d-flex justify-content-center align-items-center" style="height: 100vh;">
+          <!-- 🟦 Left Title Section -->
+  <div class="pe-5" style="min-width: 300px;">
+    <h2 class="fw-bold mb-0" style="font-size: 26px;">Top 10 Posts: Engagement</h2>
+  </div>
+
+  <!-- 🟨 Right Cards Section -->
+  <div class="flex-grow-1" style="max-width: 1100px;">
+    <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-xl-5 g-3">
+      {% for post in facebook_posts_top10 %}
+      <div class="col">
+        <a href="https://www.facebook.com/{{ post.post_id }}" target="_blank" class="text-decoration-none">
+          <div class="position-relative rounded overflow-hidden shadow-sm" style="width: 100%; aspect-ratio: 4/5;">
+            <!-- 🔺 Background Image -->
+            <img src="{{ post.post_imgs.0 }}" class="w-100 h-100" style="object-fit: cover;">
+
+            <!-- 🔵 Profile Picture + Facebook Icon -->
+            <div class="position-absolute top-0 start-0 m-2">
+              <div class="position-relative" style="width: 24px; height: 24px;">
+                {% if post.page_profile_pic %}
+                  <img src="{{ post.page_profile_pic }}" class="rounded-circle border border-white w-100 h-100" style="object-fit: cover;">
+                {% else %}
+                  <img src="{% static 'assets/img/icons/default_profile.png' %}" class="rounded-circle border border-white w-100 h-100" style="object-fit: cover;">
+                {% endif %}
+                <img src="{% static 'assets/img/icons/facebooklogo.png' %}" width="10" height="10" class="position-absolute bottom-0 end-0 bg-white rounded-circle border border-white">
+              </div>
+            </div>
+
+            <!-- 📈 Engagement Rate -->
+            <div class="position-absolute top-0 end-0 m-2">
+              <span class="bg-dark text-white small px-2 py-1 rounded" style="opacity: 0.85;">{{ post.engagement_rate }}%</span>
+            </div>
+
+            <!-- 🕒 Timestamp & Content -->
+            <div class="position-absolute bottom-0 start-0 text-white text-shadow p-2" style="font-size: 11px; width: 100%; background: linear-gradient(transparent, rgba(0,0,0,0.55));">
+              <div>{{ post.post_timestamp }}</div>
+              <div class="fw-semibold text-truncate">{{ post.post_content }}</div>
+            </div>
+
+            <!-- 📷 Post Type -->
+            <div class="position-absolute bottom-0 end-0 m-2">
+              {% if post.post_type == "video" %}
+                <i class="fas fa-play-circle text-white"></i>
+              {% else %}
+                <i class="fas fa-image text-white"></i>
+              {% endif %}
+            </div>
+          </div>
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+function openPresentation() {
+  var modal = new bootstrap.Modal(document.getElementById('presentationModal'));
+  modal.show();
+}
+</script>
+
+
+
 
 
             <!-- Footer -->
