@@ -25,7 +25,11 @@ SECRET_KEY = "django-insecure-v4a8b%d*kuz4n@*+vp8l1z5a^g*r)hf)kav=i%ju+nzum@9!@)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    'growfox-data-marketing-cent-9a5zl.kinsta.app',
+]
 
 
 # Application definition
