@@ -5,3 +5,4 @@ psycopg2-binary
 gunicorn
 requests==2.32.3
 beautifulsoup4==4.13.3
+playwright==1.52.0
